@@ -13,13 +13,13 @@ class CWattack():
         self.c=c#权衡两个损失函数的比重
         self.k=k#调整对抗样本的置信度
         
-    def forward(self,net,im0,im1,target=False):
+    def forward(self,net,img0,im1,target=False):
         device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         print(device)
         net.to(device)
-        im0=torch.unsqueeze(im0,0).to(device)
+        img0=torch.unsqueeze(img0,0).to(device)
         im1=torch.unsqueeze(im1,0).to(device)
-        out0=net(im0).to(device)
+        out0=net(img0).to(device)
         out1=net(im1).to(device)
         
         y0=np.array(out0[0].data.cpu()).argsort()[::-1]
@@ -43,7 +43,7 @@ class CWattack():
             else:
                 return torch.clamp(label_max-label_second,min=-k)#无目标攻击
             
-        w=torch.zeros_like(im0).to(device)
+        w=torch.zeros_like(img0).to(device)
         w.requires_grad=True
         optimizer=torch.optim.Adam([w],lr=self.lr)
         prev=1e10
@@ -51,10 +51,10 @@ class CWattack():
         k_i=id_max
         k=self.k
         c=self.c
-        attack_image=im0
+        attack_image=img0
         for i in range(self.step):
             a=1/2*(torch.nn.Tanh()(w)+1)#利用tanh把图片的大小固定到（0，1）
-            loss1=torch.nn.MSELoss(reduction='sum')(im0,a)#利用mseloss计算干扰图和原图的差距
+            loss1=torch.nn.MSELoss(reduction='sum')(img0,a)#利用mseloss计算干扰图和原图的差距
             loss2=self.c*f(a,self.k)            
             loss=loss1+loss2
             optimizer.zero_grad()
@@ -77,11 +77,11 @@ class CWattack():
                 self.k=k/10
             loop_i +=1
             
-        im0_label=id_max
+        img0_label=id_max
         im1_label=id_target
         out_attack=net(attack_image).to(device)
         y_attack=np.array(out_attack[0].data.cpu()).argsort()[::-1]
         id_attack=y_attack[0]
         attack_lable=id_attack
-        r_tot=(attack_image-im0).cpu().detach().numpy()
-        return loss1,loss2,r_tot,loop_i,im0_label,im1_label,attack_lable,attack_image
+        r_tot=(attack_image-img0).cpu().detach().numpy()
+        return loss1,loss2,r_tot,loop_i,img0_label,im1_label,attack_lable,attack_image
