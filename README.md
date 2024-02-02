@@ -5,14 +5,14 @@ Adversarial attack can generate attack samples for the classical object detectio
 
 ## Demo
 ### Object detection
-
+![untargeted attack](result_images/untargeted_attack.png)
 ### Object recognition
 
 
 
 ## Algorithm Explanation
 ### Object detection
-![Process](result_images/process.png)
+![Process](result_images/process.png 'Algorithm Process')
 
 In order to reduce the *loss* function from falling into the local optimum during the training process. We first gradient processed the *loss* function.This gradient processing can make *loss* more inclined to optimize pixels with high gradient values. After designing the *loss* function. We use the *loss* function to derive the derivative of the entire image to obtain the gradient image. Then we made *𝑀ASK*, *𝑀ASK* which are used to select which points to use for attack.
 
