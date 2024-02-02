@@ -14,8 +14,15 @@ Adversarial attack can generate attack samples for the classical object detectio
 ### Object detection
 ![Process](result_images/process.png)
 
-In order to reduce the *loss* function from falling into the local optimum during the training process. We first gradient processed the *loss* function, as follows:
+In order to reduce the *loss* function from falling into the local optimum during the training process. We first gradient processed the *loss* function.This gradient processing can make *loss* more inclined to optimize pixels with high gradient values. After designing the *loss* function. We use the *loss* function to derive the derivative of the entire image to obtain the gradient image. Then we made *𝑀ASK*, *𝑀ASK* which are used to select which points to use for attack.
 
+Then enter the random-hot restart part of our design. We set the upper limit of the maximum change points to 2% of the original image, and the update amplitude is smaller than the visible range of the human eye (within 15 grayscale values). Then specify the upper limit of pixel value for each iteration 𝑛𝑢𝑚.
+
+The single random-hot restart process is as follows:
+
+Sort all the gradient values in the gradient graph, and then randomly select 𝑛𝑢𝑚 values from the top N values that we set to satisfy the upper limit of the gradient value greater than the threshold for this round of updates. Then update *MASK* immediately and reduce the upper limit N, and perform a single round of iteration upper limit based on the gradient image after *𝑀𝐴𝑆𝐾* masking, that is, control each update to be carried out with a smaller amplitude, and then add the single round gradient update to the cumulative gradient update pool. And control the cumulative gradient update value to be less than the upper limit of variation. Finally, subtract the cumulative gradient from the original image, and control the pixel range of the adversarial image to be within (0-255) to obtain the adversarial image.
+
+Then the operation is restarted immediately, and we save the smallest adversarial image of 𝑙𝑜𝑠𝑠. Until the restart reaches the upper limit or the attack is successful.
 
 Here is the pseudocode:
 ```
@@ -54,6 +61,14 @@ end for
 ```
 
 ### Object recognition
+Based on the specific meanings of c and k, we propose a CWattack in which c and k can be changed.
+
+When the sample is first generated, there is a large gap between the generated image and the original image. At this time, 𝑅𝑛 should be used as the main loss function, that is, an image similar to the original image must be generated first. At this time, we set c to 0.
+
+When the adversarial sample is similar to the original sample, that is, when 𝑅𝑛 is less than a certain value, c and k are set to a certain value. At this time, the loss function 𝐾𝑛 starts to take effect, and the probability of the adversarial sample being misidentified increases.
+
+If you want the confidence that the adversarial sample will be misidentified to be high, CWattack can stop here. If you want the adversarial sample to achieve the adversarial effect with as small changes as possible, you can also enter the next stage. At this time, adjust both c and k smaller than in the previous stage, and then train.
+
 
 ## Instruction
 ### Object detection
