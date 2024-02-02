@@ -5,7 +5,11 @@ Adversarial attack can generate attack samples for the classical object detectio
 
 ## Demo
 ### Object detection
-![untargeted attack](result_images/untargeted_attack.png)
+
+<img src="result_images/untargeted.png" alt="untargeted attack" width="400" height="200"/>
+<img src="result_images/targeted.png" alt="targeted attack" width="400" height="200"/>
+<img src="result_images/targeted_goal.png" alt="targeted attack with a goal" width="400" height="200"/>
+
 ### Object recognition
 
 
