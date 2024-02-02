@@ -10,11 +10,11 @@ Make all of the bounding box disappear.
 <img src="result_images/untargeted.png" alt="untargeted attack" width="600" height="300"/>
 
 #### Targeted attack
-Make the targeted bounding box disappear.
+Make the targeted bounding boxs disappear.
 <img src="result_images/targeted.png" alt="targeted attack" width="600" height="400"/>
 
 #### Targeted attack with a goal
-Make the targeted bounding box identified the object to another specific class.
+Make the targeted bounding boxs identify the object to another specific class.
 <img src="result_images/targeted_goal.png" alt="targeted attack with a goal" width="600" height="400"/>
 
 ### Object recognition
