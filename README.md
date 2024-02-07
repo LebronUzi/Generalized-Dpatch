@@ -85,7 +85,7 @@ end for
 ### Object recognition
 Based on the specific meanings of c and k, we propose a CWattack in which c and k can be changed.
 
-When the sample is first generated, there is a large gap between the generated image and the original image. At this time, 𝑅𝑛 should be used as the main loss function, that is, an image similar to the original image must be generated first. At this time, we set c to 0.
+When the sample is first generated, there is a large gap between the generated image and the original image. At this time, 𝑅𝑛 should be used as the main loss function, that is, an image similar to the original image must be generated first. At this time, we can set c to 0.
 
 When the adversarial sample is similar to the original sample, that is, when 𝑅𝑛 is less than a certain value, c and k are set to a certain value. At this time, the loss function 𝐾𝑛 starts to take effect, and the probability of the adversarial sample being misidentified increases.
 
