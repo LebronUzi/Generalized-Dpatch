@@ -102,7 +102,7 @@ Open random_make_patch.py, set the parameters you need in the parameter list, an
 * **Evaluate**: Use the coco toolbox to compare the saved json and the original new.json and generate the pr curve and store it in prcurve at the same level.
 ### Object recognition
 
-* **Model loading**: Open the test_deepfool.py or test_CWattack file, read the original sample and target sample in the images, and input them into the network to obtain the category of the original sample and the category of the target sample. Use the category of the target sample as the target of targeted confrontation.
+* **Model loading**: Open the test_deepfool.py or test_CWattack file, and read the original sample and target sample in the images. Then input them into the network to obtain the category of the original sample and the category of the target sample. Use the category of the target sample as the target of targeted confrontation.
   
 * **Training process**: Use deepfool and CWattack perturb the sample, and the output result includes a picture composed of the perturbation.
 
