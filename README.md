@@ -1,22 +1,22 @@
 # Adversarial attack on classical object recognition and detection network   
 
 ## Introduction
-Adversarial attack can generate attack samples for the classical object detection and recognition network. An adversarial attack in machine learning refers to a technique used to fool machine learning models. This is typically done by making subtle, calculated modifications to the input data, causing the model to make a mistake in its output or decision. It can evaluate the robustness of models, reveal vulnerabilities of systems, enhance privacy protection and act as a form of regularization to enhance generalization. 
+Adversarial attack can generate attack samples for the classical object detection and recognition network. The adversarial attack in machine learning refers to a technique used to fool machine learning models. This is typically done by making subtle, calculated modifications to the input data, causing the model to make a mistake in its output or decision. It can evaluate the robustness of models, reveal vulnerabilities of systems, enhance privacy protection and act as a form of regularization to enhance generalization. 
 
 ## Demo
 ### Object detection
 #### Untargeted attack
-Make all of the bounding box disappear.
+This attack can make all of the bounding box disappear.
 
 <img src="result_images/untargeted.png" alt="untargeted attack" width="600" height="300"/>
 
 #### Targeted attack
-Make the targeted bounding boxs disappear.
+This attack can make the targeted bounding boxs disappear.
 
 <img src="result_images/targeted.png" alt="targeted attack" width="600" height="400"/>
 
 #### Targeted attack with a goal
-Make the targeted bounding boxs identify the object to another specific class.
+This attack can make the targeted bounding boxs identify the object to another specific class.
 
 <img src="result_images/targeted_goal.png" alt="targeted attack with a goal" width="600" height="400"/>
 
